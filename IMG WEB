@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irene Martínez</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --ink: #0E0E10;
+    --bone: #F5F4F0;
+    --rust: #C7401F;
+    --steel: #5A5A5E;
+    --steel-light: #8A8A8E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100vh;
+    background: var(--ink);
+    color: var(--bone);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        rgba(245, 244, 240, 0.025) 0px,
+        rgba(245, 244, 240, 0.025) 1px,
+        transparent 1px,
+        transparent 28px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mark {
+    width: 46px;
+    height: 46px;
+    border: 2px solid var(--rust);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    animation: fade-up 0.6s ease both;
+  }
+
+  .mark span {
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0;
+    color: var(--rust);
+  }
+
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(34px, 9vw, 46px);
+    letter-spacing: 0.04em;
+    text-align: center;
+    line-height: 1.25;
+    text-transform: uppercase;
+    color: var(--bone);
+    animation: fade-up 0.6s ease 0.05s both;
+  }
+
+  .role {
+    margin-top: 10px;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust);
+    font-weight: 700;
+    animation: fade-up 0.6s ease 0.1s both;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,244,240,0.18), transparent);
+    margin: 32px 0 28px;
+    animation: fade-up 0.6s ease 0.15s both;
+  }
+
+  .links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .link-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 22px;
+    background: #17171A;
+    border: 1px solid rgba(245, 244, 240, 0.08);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--bone);
+    overflow: hidden;
+    transition: border-color 0.25s ease, transform 0.15s ease, background 0.25s ease;
+    animation: fade-up 0.6s ease both;
+  }
+
+  .link-card:nth-of-type(1) { animation-delay: 0.2s; }
+  .link-card:nth-of-type(2) { animation-delay: 0.27s; }
+  .link-card:nth-of-type(3) { animation-delay: 0.34s; }
+
+  .link-card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--rust);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+
+  .link-card:hover,
+  .link-card:focus-visible {
+    border-color: rgba(199, 64, 31, 0.5);
+    background: #1B1B1E;
+    transform: translateY(-2px);
+  }
+
+  .link-card:hover::before,
+  .link-card:focus-visible::before {
+    transform: scaleY(1);
+  }
+
+  .link-card:focus-visible {
+    outline: 2px solid var(--rust);
+    outline-offset: 2px;
+  }
+
+  .link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .link-title {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .link-sub {
+    font-size: 12px;
+    color: var(--steel-light);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .arrow {
+    font-size: 18px;
+    color: var(--steel-light);
+    transition: color 0.25s ease, transform 0.25s ease;
+    flex-shrink: 0;
+    margin-left: 14px;
+  }
+
+  .link-card:hover .arrow,
+  .link-card:focus-visible .arrow {
+    color: var(--rust);
+    transform: translateX(3px);
+  }
+
+  footer {
+    margin-top: 36px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--steel);
+    animation: fade-up 0.6s ease 0.45s both;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mark"><span>IM</span></div>
+    <h1>Irene<br>Martínez</h1>
+    <p class="role">CÓDIGO🏷️: IRENE10</p>
+
+    <div class="divider"></div>
+
+    <nav class="links">
+      <a class="link-card" href="https://beastout.eu" target="_blank" rel="noopener noreferrer">
+        <span class="link-text">
+          <span class="link-title">BeastOut</span>
+          <span class="link-sub">beastout.eu</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="link-card" href="https://corexsport.com" target="_blank" rel="noopener noreferrer">
+        <span class="link-text">
+          <span class="link-title">Corex Sport</span>
+          <span class="link-sub">corexsport.com</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="link-card" href="https://gritprogramming.eu" target="_blank" rel="noopener noreferrer">
+        <span class="link-text">
+          <span class="link-title">Grit Programming</span>
+          <span class="link-sub">gritprogramming.eu</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+    </nav>
+
+    <footer>Irene Martínez · 2026</footer>
+  </div>
+</body>
+</html>
